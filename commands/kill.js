@@ -24,7 +24,7 @@ module.exports.run = (client, message, args) => {
             }).catch((error) => {
                 message.channel.send(client.embederror(error))
             });
-        };
+        }
     });
 }
 module.exports.help = {
