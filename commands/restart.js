@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 const settings = require("../settings.json")
-const node = require('nodeactyl')
+const node = require('ptero-api')
 const Client = node.Client;
 const sql = require("sqlite")
 sql.open("./users.sqlite")
@@ -10,14 +10,10 @@ module.exports.run = (client, message, args) => {
             const user = message.author.username
             message.channel.send(client.noperm(user))
         } else {
-            Client.login(settings.panelURL, row.token, (logged_in) => {
-                if(logged_in === false){
-                    return message.channel.send(client.embederror(`You don't have a valid token or a account on the panel.`))
-                }    
-            });
+            const Client = new node.NodeactylClient(settings.panelURL, row.token);
             Client.restartServer(args[0]).then((response) => {
                 const embed = new Discord.MessageEmbed()
-                .setTitle(response)
+                .setTitle("Restarting the server")
                 .setColor(settings.embed.color.default)
                 .setFooter(settings.embed.footer);
                 message.channel.send(embed);
