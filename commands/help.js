@@ -6,7 +6,7 @@ module.exports.run = (client, message, args) => {
     const embed = new Discord.MessageEmbed()
         .setTitle(`:mailbox_with_mail: Help`)
         .setColor(settings.embed.color.default)
-        .setDescription(`**Commands:**\n${p}kill\n${p}register\n${p}reset\n${p}restart\n${p}servers\n${p}start\n${p}stop`)
+        .setDescription(`**Commands:**\n${p}kill\n${p}register\n${p}reset\n${p}restart\n${p}servers\n${p}start\n${p}stop\n${p}backup\n${p}backups`)
         .setFooter(settings.embed.footer);
     message.channel.send(embed);
 }
