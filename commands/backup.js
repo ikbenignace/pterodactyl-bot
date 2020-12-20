@@ -15,7 +15,6 @@ module.exports.run = (client, message, args) => {
         } else {
             const Client = new node.NodeactylClient(settings.panelURL, row.token);
             Client.createServerBackup(args[0]).then((response) => {
-                console.log(response)
                 const embed = new Discord.MessageEmbed()
                     .setTitle(`Created ${response.name}`)
                     .setURL()
@@ -23,7 +22,6 @@ module.exports.run = (client, message, args) => {
                     .setFooter(settings.embed.footer);
                 message.channel.send(embed);
             }).catch((error) => {
-                console.log(error)
                 message.channel.send(client.embederror(error))
             });
         }
