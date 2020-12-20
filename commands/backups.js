@@ -12,7 +12,7 @@ module.exports.run = (client, message, args) => {
     }
 
     sql.get(`SELECT * FROM users WHERE id = "${message.author.id}"`).then(row => {
-        if(!row){
+        if (!row) {
             message.channel.send(client.noperm(user))
         } else {
             const Client = new node.NodeactylClient(settings.panelURL, row.token);
@@ -25,14 +25,12 @@ module.exports.run = (client, message, args) => {
 
             Client.listServerBackups(args[0]).then(async response => {
                 let data = response;
-                const links = await Promise.all(data.map(element => Client.getBackupDownload(args[0],element.attributes.uuid)));
+                const links = await Promise.all(data.map(element => Client.getBackupDownload(args[0], element.attributes.uuid)));
                 data.forEach((element, id) => {
                     let link = links[id]
                     backups.addField(
                         `**${element.attributes.name}**`,
-                        `**Size**: ${Math.round(element.attributes.bytes*9.537e-7)}MB
-                        **Creating date**: ${element.attributes.created_at}
-                        **[Download](${link.url})**`, true)
+                        `**Size**: ${Math.round(element.attributes.bytes * 9.537e-7)}\nMB**Creating date**: ${element.attributes.created_at}\n**[Download](${link.url})**`, true)
                 })
                 await message.channel.send(backups);
 

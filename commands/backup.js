@@ -10,7 +10,7 @@ module.exports.run = (client, message, args) => {
         return;
     }
     sql.get(`SELECT * FROM users WHERE id = "${message.author.id}"`).then(row => {
-        if(!row){
+        if (!row) {
             message.channel.send(client.noperm(user))
         } else {
             const Client = new node.NodeactylClient(settings.panelURL, row.token);

@@ -15,7 +15,7 @@ module.exports.run = (client, message, args) => {
                 .setFooter(settings.embed.footer);
             message.author.send(embed1).then(async (d) => {
                 const filter = m => m.author.id === message.author.id;
-                d.channel.awaitMessages(filter, { max: 1, time: 60000 })
+                d.channel.awaitMessages(filter, {max: 1, time: 60000})
                     .then(collected => {
                         sql.run(`UPDATE users SET token = "${collected.first().content}" WHERE id = "${message.author.id}"`).catch(error => {
                             return message.channel.send(client.embederror(error))
@@ -29,8 +29,8 @@ module.exports.run = (client, message, args) => {
                             return d.edit(client.embederror(`You did not provide a token within the given amount of time.`))
                         }
                     }).catch(err => {
-                        message.channel.send(client.embederror(err))
-                    })
+                    message.channel.send(client.embederror(err))
+                })
             }).catch(err => {
                 message.channel.send(client.embederror(err))
             })

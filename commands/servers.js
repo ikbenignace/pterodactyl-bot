@@ -29,13 +29,7 @@ module.exports.run = (client, message, args) => {
                     let usage = usages[id]
                     servers.addField(
                         `**${element.attributes.name}**`,
-                        `**Id**: [${element.attributes.identifier}](https://panel.mcserver.be/server/${element.attributes.identifier})
-                        **RAM**: ${Math.round(usage.resources.memory_bytes*9.537e-7)}/${element.attributes.limits.memory}MB
-                        **CPU Usage**: ${usage.resources.cpu_absolute}%
-                        **Disk Usage**: ${Math.round(usage.resources.disk_bytes*9.537e-7)}MB
-                        **Node**: ${element.attributes.node}
-                        **Status**: ${usage.current_state}
-                        **IP**: ${element.attributes.relationships.allocations.data[0].attributes.ip}:${element.attributes.relationships.allocations.data[0].attributes.port}`, true)
+                        `**Id**: [${element.attributes.identifier}](https://panel.mcserver.be/server/${element.attributes.identifier})\n**RAM**: ${Math.round(usage.resources.memory_bytes * 9.537e-7)}/${element.attributes.limits.memory}MB\n**CPU Usage**: ${usage.resources.cpu_absolute}%\n**Disk Usage**: ${Math.round(usage.resources.disk_bytes * 9.537e-7)}MB\n**Node**: ${element.attributes.node}\n**Status**: ${usage.current_state}\n**IP**: ${element.attributes.relationships.allocations.data[0].attributes.ip}:${element.attributes.relationships.allocations.data[0].attributes.port}`, true)
                 })
                 await message.channel.send(servers);
 
