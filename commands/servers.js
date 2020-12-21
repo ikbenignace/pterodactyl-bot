@@ -33,8 +33,8 @@ module.exports.run = (client, message, args) => {
                 })
                 await message.channel.send(servers);
 
-            }).catch(err => {
-                console.log(err)
+            }).catch(error => {
+                message.channel.send(client.embederror(error))
             })
 
 

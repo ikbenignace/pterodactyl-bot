@@ -34,8 +34,8 @@ module.exports.run = (client, message, args) => {
                 })
                 await message.channel.send(backups);
 
-            }).catch(err => {
-                console.log(err)
+            }).catch(error => {
+                message.channel.send(client.embederror(error))
             })
         }
 

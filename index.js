@@ -25,6 +25,7 @@ fs.readdir("./commands/", (err, files) => {
     client.logger.log(`Loaded ${jsfiles.length} commands!`, "cmd")
 
 });
+
 const init = async () => {
     const evtFiles = await readdir("./events/");
     client.logger.log(`Loading a total of ${evtFiles.length} events.`);
@@ -35,9 +36,19 @@ const init = async () => {
         delete require.cache[require.resolve(`./events/${file}`)];
     });
 }
-init();
-client.embederror = function (text) {
 
+init();
+
+client.embederror = function (error) {
+    let text;
+    if (error == "304") {
+        text = `Your API key is wrong`;
+    }
+    else if (error == "404") {
+       text = `The serverId is wrong`;
+    } else {
+        text = `Something went wrong, error: ${error}`;
+    }
     const embed = new Discord.MessageEmbed()
         .setTitle("Error")
         .setDescription(text)
@@ -46,6 +57,7 @@ client.embederror = function (text) {
         .setTimestamp();
     return embed;
 };
+
 client.noperm = function (text) {
     const embed = new Discord.MessageEmbed()
         .setTitle(`${text} you don't have permission to use this command.`)
@@ -54,7 +66,9 @@ client.noperm = function (text) {
         .setTimestamp();
     return embed;
 };
+
 process.on('unhandledRejection', err => {
     client.logger.error(`Uncaught Promise Error: \n${err}`);
 });
+
 client.login(settings.token);
